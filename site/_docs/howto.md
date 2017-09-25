@@ -492,6 +492,7 @@ git clean -xn
 mvn clean
 
 # Do a dry run of the release:prepare step, which sets version numbers
+# (accept the default tag name of calcite-X.Y.Z)
 mvn -DdryRun=true -DskipTests -DreleaseVersion=X.Y.Z -DdevelopmentVersion=X.Y+1.Z-SNAPSHOT -Papache-release -Darguments="-Dgpg.passphrase=${GPG_PASSPHRASE}" release:prepare 2>&1 | tee /tmp/prepare-dry.log
 {% endhighlight %}
 
@@ -528,6 +529,7 @@ The version will be automatically changed when performing the release for real.
 * Check PGP, per [this](https://httpd.apache.org/dev/verification.html)
 
 Now, remove the `-DdryRun` flag and run the release for real.
+For this step you'll have to add the [Apache servers](https://maven.apache.org/developers/committer-settings.html) to `~/.m2/settings.xml`.
 
 {% highlight bash %}
 # Prepare sets the version numbers, creates a tag, and pushes it to git
